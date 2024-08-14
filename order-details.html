@@ -10,7 +10,8 @@
             width: 80mm; /* Set the width for thermal printer */
             margin: 0;
             padding: 10px;
-            font-size: 12px;
+            font-size: 10px; /* Adjust general font size */
+            color: black; /* Ensure all text is black */
         }
 
         .header, .footer {
@@ -18,16 +19,22 @@
             margin-bottom: 10px;
         }
 
-        .header h1, .header p {
+        .header h1 {
+            font-size: 12px; /* Set font size for Shop Name */
+            font-weight: bold; /* Make Shop Name bold */
+        }
+
+        .header p, .content p, .footer p {
             margin: 5px 0;
+            font-weight: normal; /* Set all other text to normal weight */
+        }
+
+        .bold {
+            font-weight: bold;
         }
 
         .content {
             margin-bottom: 15px;
-        }
-
-        .content p {
-            margin: 5px 0;
         }
 
         .qr-code {
@@ -46,30 +53,35 @@
             font-size: 10px;
         }
 
-        .bold {
-            font-weight: bold;
-        }
-
-        .italic {
-            font-style: italic;
-            color: red; /* Optional: Use color to visually differentiate */
+        button {
+            padding: 5px 10px;
+            font-size: 10px;
+            color: white;
+            background-color: #0711D5; /* Use the theme color */
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1 class="bold" id="shopname">Shop Name</h1>
-        <p class="italic" id="shopaddress">Shop Address</p>
-        <p class="italic" id="shopcontactnumber">Shop Contact Number</p>
+        <h1 id="shopname">Shop Name</h1>
+        <p id="shopaddress">Shop Address</p>
+        <p id="shopcontactnumber">Shop Contact Number</p>
     </div>
 
     <div class="content">
-        <p><span class="bold">Customer Name:</span> <span class="italic" id="customername"></span></p>
-        <p><span class="bold">Transaction Number:</span> <span class="italic" id="orderid"></span></p>
-        <p><span class="bold">Date of transaction:</span> <span class="italic" id="transactiondate"></span></p>
-        <p><span class="bold">Total Amount Ordered:</span> <span class="italic" id="orderedqty"></span></p>
-        <p><span class="bold">Total Amount:</span> <span class="italic" id="totalamount"></span></p>
-        <p><span class="bold">Card Number:</span> <span class="italic" id="cardnumber"></span></p>
+        <p>Customer Name: <span id="customername"></span></p>
+        <p>Transaction Number: <span id="orderid"></span></p>
+        <p>Date of transaction: <span id="transactiondate"></span></p>
+        <p>Total Amount Ordered: <span id="orderedqty"></span></p>
+        <p>Total Amount: <span id="totalamount"></span></p>
+        <p>Card Number: <span id="cardnumber"></span></p>
     </div>
 
     <div class="qr-code">
@@ -77,9 +89,12 @@
     </div>
 
     <div class="footer">
-        <p>This system is powered by <br><span class="bold">Momsbest Mobile App</span></p>
+        <p>This system is powered by</p>
+        <p class="bold">Momsbest Mobile App</p>
         <p>Your Ultimate Laundry App</p>
     </div>
+
+    <button onclick="window.print();">Print This Page</button>
 
     <script>
         // Function to get URL parameters
