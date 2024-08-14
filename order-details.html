@@ -58,7 +58,7 @@
 </head>
 <body>
     <div class="header">
-        <h1 class="bold">Shop Name</h1>
+        <h1 class="bold" id="shopname">Shop Name</h1>
         <p class="italic" id="shopaddress">Shop Address</p>
         <p class="italic" id="shopcontactnumber">Shop Contact Number</p>
     </div>
@@ -86,28 +86,30 @@
         function getQueryParams() {
             const params = new URLSearchParams(window.location.search);
             return {
+                shopname: params.get('shopname'),
+                shopaddress: params.get('shopaddress'),
+                shopcontactnumber: params.get('shopcontactnumber'),
                 customername: params.get('customername'),
                 orderid: params.get('orderid'),
                 transactiondate: params.get('transactiondate'),
                 orderedqty: params.get('orderedqty'),
                 totalamount: params.get('totalamount'),
-                cardnumber: params.get('cardnumber'),
-                shopaddress: params.get('shopaddress'),
-                shopcontactnumber: params.get('shopcontactnumber')
+                cardnumber: params.get('cardnumber')
             };
         }
 
         // Use the parameters to fill the content
         document.addEventListener('DOMContentLoaded', function() {
             const params = getQueryParams();
+            document.getElementById('shopname').textContent = params.shopname;
+            document.getElementById('shopaddress').textContent = params.shopaddress;
+            document.getElementById('shopcontactnumber').textContent = params.shopcontactnumber;
             document.getElementById('customername').textContent = params.customername;
             document.getElementById('orderid').textContent = params.orderid;
             document.getElementById('transactiondate').textContent = params.transactiondate;
             document.getElementById('orderedqty').textContent = params.orderedqty;
             document.getElementById('totalamount').textContent = params.totalamount;
             document.getElementById('cardnumber').textContent = params.cardnumber;
-            document.getElementById('shopaddress').textContent = params.shopaddress;
-            document.getElementById('shopcontactnumber').textContent = params.shopcontactnumber;
         });
     </script>
 </body>
