@@ -3,34 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Details</title>
+    <title>Order Receipt</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            width: 80mm; /* Set the width to match the thermal printer */
+            margin: 0;
+            padding: 10px;
+            font-size: 12px; /* Adjust font size for readability */
         }
-        .print-content {
-            margin: 20px 0;
+
+        .header, .footer {
+            text-align: center;
+            margin-bottom: 10px;
         }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            color: white;
-            background-color: #0711D5; /* Your theme color */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+
+        .header h1, .header h2 {
+            margin: 0;
+        }
+
+        .content {
+            margin-bottom: 15px;
+        }
+
+        .content p {
+            margin: 5px 0;
+        }
+
+        .qr-code {
+            display: block;
+            margin: 20px auto;
+            width: 50mm; /* Adjust size for the QR code */
+            height: 50mm;
+            border: 1px solid #000;
+            text-align: center;
+            line-height: 50mm;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 10px; /* Smaller font for footer */
+        }
+
+        .bold {
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="print-content">
-        <h1>Order Details</h1>
-        <p>Name: <span id="customer-name"></span></p>
-        <p>Order Number: <span id="order-number"></span></p>
-        <p>Total: <span id="total-amount"></span></p>
+    <div class="header">
+        <h1>Shop Name</h1>
+        <h2>Shop Address</h2>
+        <p>Shop Contact Number</p>
     </div>
-    <button onclick="window.print();">Print This Page</button>
+
+    <div class="content">
+        <p><span class="bold">Customer Name:</span> <span id="customer-name"></span></p>
+        <p><span class="bold">Transaction Number:</span> <span id="orderid"></span></p>
+        <p><span class="bold">Date of transaction:</span> <span id="transactiondate"></span></p>
+        <p><span class="bold">Total Amount Ordered:</span> <span id="orderedqty"></span></p>
+        <p><span class="bold">Total Amount:</span> <span id="totalamount"></span></p>
+        <p><span class="bold">Card Number:</span> <span id="cardnumber"></span></p>
+    </div>
+
+    <div class="qr-code">
+        QR Code Image
+    </div>
+
+    <div class="footer">
+        <p>This system is powered by <br>Momsbest Mobile App</p>
+        <p>Your Ultimate Laundry App</p>
+    </div>
 
     <script>
         // Function to get URL parameters
@@ -38,8 +81,11 @@
             const params = new URLSearchParams(window.location.search);
             return {
                 name: params.get('name'),
-                orderNumber: params.get('orderNumber'),
-                total: params.get('total')
+                orderid: params.get('orderid'),
+                transactiondate: params.get('transactiondate'),
+                orderedqty: params.get('orderedqty'),
+                totalamount: params.get('totalamount'),
+                cardnumber: params.get('cardnumber')
             };
         }
 
@@ -47,8 +93,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             const params = getQueryParams();
             document.getElementById('customer-name').textContent = params.name;
-            document.getElementById('order-number').textContent = params.orderNumber;
-            document.getElementById('total-amount').textContent = params.total;
+            document.getElementById('orderid').textContent = params.orderid;
+            document.getElementById('transactiondate').textContent = params.transactiondate;
+            document.getElementById('orderedqty').textContent = params.orderedqty;
+            document.getElementById('totalamount').textContent = params.totalamount;
+            document.getElementById('cardnumber').textContent = params.cardnumber;
         });
     </script>
 </body>
