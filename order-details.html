@@ -7,10 +7,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            width: 80mm; /* Set the width to match the thermal printer */
+            width: 80mm; /* Set the width for thermal printer */
             margin: 0;
             padding: 10px;
-            font-size: 12px; /* Adjust font size for readability */
+            font-size: 12px;
         }
 
         .header, .footer {
@@ -18,8 +18,8 @@
             margin-bottom: 10px;
         }
 
-        .header h1, .header h2 {
-            margin: 0;
+        .header h1, .header p {
+            margin: 5px 0;
         }
 
         .content {
@@ -33,37 +33,43 @@
         .qr-code {
             display: block;
             margin: 20px auto;
-            width: 50mm; /* Adjust size for the QR code */
+            width: 50mm; /* Adjust size for QR code */
             height: 50mm;
             border: 1px solid #000;
             text-align: center;
             line-height: 50mm;
+            font-size: 14px;
         }
 
         .footer p {
             margin: 5px 0;
-            font-size: 10px; /* Smaller font for footer */
+            font-size: 10px;
         }
 
         .bold {
             font-weight: bold;
         }
+
+        .italic {
+            font-style: italic;
+            color: red; /* Optional: Use color to visually differentiate */
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>Shop Name</h1>
-        <h2>Shop Address</h2>
-        <p>Shop Contact Number</p>
+        <h1 class="bold">Shop Name</h1>
+        <p class="italic" id="shopaddress">Shop Address</p>
+        <p class="italic" id="shopcontactnumber">Shop Contact Number</p>
     </div>
 
     <div class="content">
-        <p><span class="bold">Customer Name:</span> <span id="customer-name"></span></p>
-        <p><span class="bold">Transaction Number:</span> <span id="orderid"></span></p>
-        <p><span class="bold">Date of transaction:</span> <span id="transactiondate"></span></p>
-        <p><span class="bold">Total Amount Ordered:</span> <span id="orderedqty"></span></p>
-        <p><span class="bold">Total Amount:</span> <span id="totalamount"></span></p>
-        <p><span class="bold">Card Number:</span> <span id="cardnumber"></span></p>
+        <p><span class="bold">Customer Name:</span> <span class="italic" id="customername"></span></p>
+        <p><span class="bold">Transaction Number:</span> <span class="italic" id="orderid"></span></p>
+        <p><span class="bold">Date of transaction:</span> <span class="italic" id="transactiondate"></span></p>
+        <p><span class="bold">Total Amount Ordered:</span> <span class="italic" id="orderedqty"></span></p>
+        <p><span class="bold">Total Amount:</span> <span class="italic" id="totalamount"></span></p>
+        <p><span class="bold">Card Number:</span> <span class="italic" id="cardnumber"></span></p>
     </div>
 
     <div class="qr-code">
@@ -71,7 +77,7 @@
     </div>
 
     <div class="footer">
-        <p>This system is powered by <br>Momsbest Mobile App</p>
+        <p>This system is powered by <br><span class="bold">Momsbest Mobile App</span></p>
         <p>Your Ultimate Laundry App</p>
     </div>
 
@@ -80,24 +86,28 @@
         function getQueryParams() {
             const params = new URLSearchParams(window.location.search);
             return {
-                name: params.get('name'),
+                customername: params.get('customername'),
                 orderid: params.get('orderid'),
                 transactiondate: params.get('transactiondate'),
                 orderedqty: params.get('orderedqty'),
                 totalamount: params.get('totalamount'),
-                cardnumber: params.get('cardnumber')
+                cardnumber: params.get('cardnumber'),
+                shopaddress: params.get('shopaddress'),
+                shopcontactnumber: params.get('shopcontactnumber')
             };
         }
 
         // Use the parameters to fill the content
         document.addEventListener('DOMContentLoaded', function() {
             const params = getQueryParams();
-            document.getElementById('customer-name').textContent = params.name;
+            document.getElementById('customername').textContent = params.customername;
             document.getElementById('orderid').textContent = params.orderid;
             document.getElementById('transactiondate').textContent = params.transactiondate;
             document.getElementById('orderedqty').textContent = params.orderedqty;
             document.getElementById('totalamount').textContent = params.totalamount;
             document.getElementById('cardnumber').textContent = params.cardnumber;
+            document.getElementById('shopaddress').textContent = params.shopaddress;
+            document.getElementById('shopcontactnumber').textContent = params.shopcontactnumber;
         });
     </script>
 </body>
