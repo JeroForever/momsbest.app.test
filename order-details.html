@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .print-content {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #0711D5; /* Your theme color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="print-content">
+        <h1>Order Details</h1>
+        <p>Name: <span id="customer-name"></span></p>
+        <p>Order Number: <span id="order-number"></span></p>
+        <p>Total: <span id="total-amount"></span></p>
+    </div>
+    <button onclick="window.print();">Print This Page</button>
+
+    <script>
+        // Function to get URL parameters
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                name: params.get('name'),
+                orderNumber: params.get('orderNumber'),
+                total: params.get('total')
+            };
+        }
+
+        // Use the parameters to fill the content
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = getQueryParams();
+            document.getElementById('customer-name').textContent = params.name;
+            document.getElementById('order-number').textContent = params.orderNumber;
+            document.getElementById('total-amount').textContent = params.total;
+        });
+    </script>
+</body>
+</html>
