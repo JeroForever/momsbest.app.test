@@ -8,10 +8,12 @@
         body {
             font-family: Arial, sans-serif;
             width: 80mm; /* Set the width for thermal printer */
+            height: 150mm; /* Enforce fixed height for printout */
             margin: 0;
             padding: 10px;
             font-size: 10px; /* Adjust general font size */
             color: black; /* Ensure all text is black */
+            overflow: hidden; /* Prevent content overflow */
         }
 
         .header, .footer {
@@ -48,6 +50,21 @@
         .footer p {
             margin: 5px 0;
             font-size: 10px;
+        }
+
+        /* Optional: Control the layout to fit within 150mm */
+        @media print {
+            body {
+                height: 150mm;
+                width: 80mm;
+                margin: 0;
+                padding: 10px;
+            }
+
+            /* Hide elements that overflow */
+            .content, .header, .footer {
+                overflow: hidden;
+            }
         }
     </style>
 </head>
