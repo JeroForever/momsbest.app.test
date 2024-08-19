@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,7 +103,6 @@
         <p id="shopaddress">Shop Address</p>
         <p id="shopcontactnumber">Shop Contact Number</p>
         <p>&nbsp;</p>
-        <p>&nbsp;</p>
     </div>
 
     <div class="content">
@@ -111,13 +111,13 @@
         <p>Date of transaction: <span id="transactiondate"></span></p>
         <p>Total Amount Ordered: <span id="orderedqty"></span></p>
         <p>Total Amount: <span id="totalamount"></span></p>
-        <p>Card Number: <span id="cardnumber"></span></p>
+        <p>&nbsp;</p>
     </div>
 
     <div class="card-box" id="cardnumber-box">
         <!-- Card Number will appear here -->
-    </div>
     <div class="card-label">Card Number</div>
+    <p>&nbsp;</p>
 
     <div class="footer">
         <p>This system is powered by</p>
@@ -153,7 +153,6 @@
             document.getElementById('transactiondate').textContent = params.transactiondate;
             document.getElementById('orderedqty').textContent = params.orderedqty;
             document.getElementById('totalamount').textContent = params.totalamount;
-            document.getElementById('cardnumber').textContent = params.cardnumber;
 
             // Set the Card Number in the card-box div
             document.getElementById('cardnumber-box').textContent = params.cardnumber;
