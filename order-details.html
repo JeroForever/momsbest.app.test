@@ -128,10 +128,13 @@
             // Set the QR code image
             document.getElementById('qrcode').src = params.qrcode;
 
-            // Trigger the print dialog once the page is fully loaded
-            window.setTimeout(function() {
-                window.print();
-            }, 500); // You can adjust the delay as needed
+            // Trigger the print dialog
+            window.print();
+
+            // Close the window after the print dialog is opened
+            window.onafterprint = function() {
+                window.close();
+            };
         });
     </script>
 </body>
