@@ -37,14 +37,29 @@
 
         .content {
             margin-bottom: 15px;
+            text-align: left; /* Align customer name to card number to the left */
+            padding-left: 10px; /* Add slight padding for better alignment */
         }
 
-        .qr-code {
+        .card-box {
             display: block;
             margin: 20px auto;
-            width: 60mm; /* Adjust size for QR code */
-            height: 60mm;
+            width: 60mm;
+            height: 50mm;
+            border: 1px solid black; /* Box around card number */
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px; /* Large font size for card number */
+            font-weight: bold;
+        }
+
+        .card-label {
+            text-align: center;
+            margin-top: 5px;
+            font-size: 16px;
+            font-weight: normal;
         }
 
         .footer p {
@@ -62,11 +77,21 @@
             }
 
             /* Ensure that all elements use the full width */
-            .header, .content, .footer
-                { width: 100%; 
+            .header, .content, .footer {
+                width: 100%; 
                 text-align: center; 
                 padding: 0; 
                 margin: 0;
+            }
+
+            .card-box {
+                width: 100%;
+                height: 50mm;
+                font-size: 48px;
+            }
+
+            .card-label {
+                margin-top: 10px;
             }
         }
     </style>
@@ -76,6 +101,8 @@
         <h1 id="shopname">Shop Name</h1>
         <p id="shopaddress">Shop Address</p>
         <p id="shopcontactnumber">Shop Contact Number</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
     </div>
 
     <div class="content">
@@ -87,9 +114,10 @@
         <p>Card Number: <span id="cardnumber"></span></p>
     </div>
 
-    <div class="qr-code">
-        <img id="qrcode" src="" alt="QR Code" width="100%" height="100%">
+    <div class="card-box" id="cardnumber-box">
+        <!-- Card Number will appear here -->
     </div>
+    <div class="card-label">Card Number</div>
 
     <div class="footer">
         <p>This system is powered by</p>
@@ -110,8 +138,7 @@
                 transactiondate: params.get('transactiondate'),
                 orderedqty: params.get('orderedqty'),
                 totalamount: params.get('totalamount'),
-                cardnumber: params.get('cardnumber'),
-                qrcode: params.get('qrcode') // New parameter for the QR code URL
+                cardnumber: params.get('cardnumber') // Removed QR code, using Card Number now
             };
         }
 
@@ -128,8 +155,8 @@
             document.getElementById('totalamount').textContent = params.totalamount;
             document.getElementById('cardnumber').textContent = params.cardnumber;
 
-            // Set the QR code image
-            document.getElementById('qrcode').src = params.qrcode;
+            // Set the Card Number in the card-box div
+            document.getElementById('cardnumber-box').textContent = params.cardnumber;
 
             // Trigger the print dialog
             window.print();
