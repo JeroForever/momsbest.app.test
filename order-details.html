@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,28 +8,28 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            width: 58mm;
-            height: auto;
+            width: 80mm; /* Set the width for thermal printer */
+            height: 150mm; /* Enforce fixed height for printout */
             margin: 0;
             padding: 0px;
-            font-size: 7px;
-            color: black;
-            overflow: hidden;
+            font-size: 14px; /* Adjust general font size */
+            color: black; /* Ensure all text is black */
+            overflow: hidden; /* Prevent content overflow */
         }
 
         .header, .footer {
             text-align: center;
-            margin-bottom: 4px;
+            margin-bottom: 10px;
         }
 
         .header h1 {
-            font-size: 12px;
-            font-weight: bold;
+            font-size: 16px; /* Set font size for Shop Name */
+            font-weight: bold; /* Make Shop Name bold */
         }
 
-        .header p, .footer p {
-            margin: 1px 0;
-            font-weight: normal;
+        .header p, .content p, .footer p {
+            margin: 5px 0;
+            font-weight: normal; /* Set all other text to normal weight */
         }
 
         .bold {
@@ -36,71 +37,62 @@
         }
 
         .content {
-            margin-bottom: 3px;
-            text-align: left;
-            padding-left: 1px;
-        }
-
-        .content p {
-            margin: 3px 0;
+            margin-bottom: 15px;
+            text-align: left; /* Align customer name to card number to the left */
+            padding-left: 5px; /* Add slight padding for better alignment */
         }
 
         .card-box {
             display: block;
-            margin: 1px auto;
-            width: 90%;
-            max-width: 36mm;
-            height: 12mm;
-            border: 1px solid black;
+            margin: 20px auto;
+            width: 60mm;
+            height: 50mm;
+            border: 1px solid black; /* Box around card number */
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
+            font-size: 48px; /* Large font size for card number */
             font-weight: bold;
         }
 
         .card-label {
             text-align: center;
-            margin-top: 2px;
-            margin-bottom: 7px;
-            font-size: 10px;
+            margin-top: 5px;
+            font-size: 16px;
             font-weight: normal;
         }
 
         .footer p {
-            margin: 3px 0;
-            font-size: 10px;
+            margin: 5px 0;
+            font-size: 12px;
         }
 
+        /* Optional: Control the layout to fit within 150mm */
         @media print {
             body {
-                width: 58mm;
+                height: 150mm;
+                width: 80mm;
                 margin: 0;
                 padding: 0px;
             }
 
-            .header, .footer {
+            /* Ensure that all elements use the full width */
+            .header, .content, .footer {
                 width: 100%; 
                 text-align: center; 
                 padding: 0; 
                 margin: 0;
             }
 
-            .content {
-                width: 100%;
-                text-align: left;
-                padding-left: 1px;
-            }
-
             .card-box {
                 width: 100%;
-                height: 20mm;
-                font-size: 36px;
+                height: 50mm;
+                font-size: 48px;
             }
 
             .card-label {
-                margin-top: 2px;
+                margin-top: 10px;
             }
         }
     </style>
@@ -124,18 +116,12 @@
 
     <div class="card-box" id="cardnumber-box">
         <!-- Card Number will appear here -->
-    </div>
     <div class="card-label">Card Number</div>
 
     <div class="footer">
         <p>This system is powered by</p>
         <p class="bold">Momsbest Mobile App</p>
         <p>Your Ultimate Laundry App</p>
-    </div>
-
-    <!-- Add the Print Button Here -->
-    <div style="text-align:center; margin-top: 20px;">
-        <button onclick="window.print()">Print</button>
     </div>
 
     <script>
@@ -151,11 +137,11 @@
                 transactiondate: params.get('transactiondate'),
                 orderedqty: params.get('orderedqty'),
                 totalamount: params.get('totalamount'),
-                cardnumber: params.get('cardnumber')
+                cardnumber: params.get('cardnumber') // Removed QR code, using Card Number now
             };
         }
 
-        // Function to populate the page content
+        // Function to populate the page content and trigger printing
         document.addEventListener('DOMContentLoaded', function() {
             const params = getQueryParams();
             document.getElementById('shopname').textContent = params.shopname;
@@ -169,6 +155,14 @@
 
             // Set the Card Number in the card-box div
             document.getElementById('cardnumber-box').textContent = params.cardnumber;
+
+            // Trigger the print dialog
+            window.print();
+
+            // Close the window after the print dialog is opened
+            window.onafterprint = function() {
+                window.close();
+            };
         });
     </script>
 </body>
