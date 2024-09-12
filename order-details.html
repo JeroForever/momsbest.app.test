@@ -156,15 +156,17 @@
             // Set the Card Number in the card-box div
             document.getElementById('cardnumber-box').textContent = params.cardnumber;
 
-            // Trigger the print dialog
+             // Trigger the first print
             window.print();
 
+            // Add a delay of 2 seconds before triggering the second print
             window.onafterprint = function() {
                 printCount += 1;
 
-            // Check if it has printed once, then trigger the second print
                 if (printCount < 2) {
-                    window.print(); // Trigger print again
+                    setTimeout(function() {
+                        window.print();
+                    }, 2000); // Delay for 2 seconds
                 } else {
                     window.close(); // Close window after second print
                 }
