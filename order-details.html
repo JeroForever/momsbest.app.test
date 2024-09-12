@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,13 +67,21 @@
             font-size: 12px;
         }
 
-        /* Optional: Control the layout to fit within 150mm */
+        /* Duplicate receipt for printing twice */
+        .receipt {
+            margin-bottom: 50px;
+        }
+
         @media print {
             body {
-                height: 150mm;
+                height: auto;
                 width: 80mm;
                 margin: 0;
                 padding: 0px;
+            }
+
+            .receipt {
+                page-break-after: always; /* Ensure each receipt starts on a new page */
             }
 
             /* Ensure that all elements use the full width */
@@ -98,30 +105,63 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1 id="shopname">Shop Name</h1>
-        <p id="shopaddress">Shop Address</p>
-        <p id="shopcontactnumber">Shop Contact Number</p>
-        <p>&nbsp;</p>
+    <div class="receipt">
+        <div class="header">
+            <h1 id="shopname">Shop Name</h1>
+            <p id="shopaddress">Shop Address</p>
+            <p id="shopcontactnumber">Shop Contact Number</p>
+            <p>&nbsp;</p>
+        </div>
+
+        <div class="content">
+            <p>Customer Name: <span id="customername"></span></p>
+            <p>Transaction Number: <span id="orderid"></span></p>
+            <p>Date of transaction: <span id="transactiondate"></span></p>
+            <p>Total Amount Ordered: <span id="orderedqty"></span></p>
+            <p>Total Amount: <span id="totalamount"></span></p>
+            <p>&nbsp;</p>
+        </div>
+
+        <div class="card-box" id="cardnumber-box">
+            <!-- Card Number will appear here -->
+        </div>
+        <div class="card-label">Card Number</div>
+
+        <div class="footer">
+            <p>This system is powered by</p>
+            <p class="bold">Momsbest Mobile App</p>
+            <p>Your Ultimate Laundry App</p>
+        </div>
     </div>
 
-    <div class="content">
-        <p>Customer Name: <span id="customername"></span></p>
-        <p>Transaction Number: <span id="orderid"></span></p>
-        <p>Date of transaction: <span id="transactiondate"></span></p>
-        <p>Total Amount Ordered: <span id="orderedqty"></span></p>
-        <p>Total Amount: <span id="totalamount"></span></p>
-        <p>&nbsp;</p>
-    </div>
+    <!-- Duplicate the same receipt -->
+    <div class="receipt">
+        <div class="header">
+            <h1 id="shopname2">Shop Name</h1>
+            <p id="shopaddress2">Shop Address</p>
+            <p id="shopcontactnumber2">Shop Contact Number</p>
+            <p>&nbsp;</p>
+        </div>
 
-    <div class="card-box" id="cardnumber-box">
-        <!-- Card Number will appear here -->
-    <div class="card-label">Card Number</div>
+        <div class="content">
+            <p>Customer Name: <span id="customername2"></span></p>
+            <p>Transaction Number: <span id="orderid2"></span></p>
+            <p>Date of transaction: <span id="transactiondate2"></span></p>
+            <p>Total Amount Ordered: <span id="orderedqty2"></span></p>
+            <p>Total Amount: <span id="totalamount2"></span></p>
+            <p>&nbsp;</p>
+        </div>
 
-    <div class="footer">
-        <p>This system is powered by</p>
-        <p class="bold">Momsbest Mobile App</p>
-        <p>Your Ultimate Laundry App</p>
+        <div class="card-box" id="cardnumber-box2">
+            <!-- Card Number will appear here -->
+        </div>
+        <div class="card-label">Card Number</div>
+
+        <div class="footer">
+            <p>This system is powered by</p>
+            <p class="bold">Momsbest Mobile App</p>
+            <p>Your Ultimate Laundry App</p>
+        </div>
     </div>
 
     <script>
@@ -137,13 +177,14 @@
                 transactiondate: params.get('transactiondate'),
                 orderedqty: params.get('orderedqty'),
                 totalamount: params.get('totalamount'),
-                cardnumber: params.get('cardnumber') // Removed QR code, using Card Number now
+                cardnumber: params.get('cardnumber')
             };
         }
 
-        // Function to populate the page content and trigger printing
         document.addEventListener('DOMContentLoaded', function() {
             const params = getQueryParams();
+
+            // Populate first receipt
             document.getElementById('shopname').textContent = params.shopname;
             document.getElementById('shopaddress').textContent = params.shopaddress;
             document.getElementById('shopcontactnumber').textContent = params.shopcontactnumber;
@@ -152,24 +193,25 @@
             document.getElementById('transactiondate').textContent = params.transactiondate;
             document.getElementById('orderedqty').textContent = params.orderedqty;
             document.getElementById('totalamount').textContent = params.totalamount;
-
-            // Set the Card Number in the card-box div
             document.getElementById('cardnumber-box').textContent = params.cardnumber;
 
-             // Trigger the first print
+            // Populate second receipt
+            document.getElementById('shopname2').textContent = params.shopname;
+            document.getElementById('shopaddress2').textContent = params.shopaddress;
+            document.getElementById('shopcontactnumber2').textContent = params.shopcontactnumber;
+            document.getElementById('customername2').textContent = params.customername;
+            document.getElementById('orderid2').textContent = params.orderid;
+            document.getElementById('transactiondate2').textContent = params.transactiondate;
+            document.getElementById('orderedqty2').textContent = params.orderedqty;
+            document.getElementById('totalamount2').textContent = params.totalamount;
+            document.getElementById('cardnumber-box2').textContent = params.cardnumber;
+
+            // Trigger the print dialog
             window.print();
 
-            // Add a delay of 2 seconds before triggering the second print
+            // Close the window after the print dialog is opened
             window.onafterprint = function() {
-                printCount += 1;
-
-                if (printCount < 2) {
-                    setTimeout(function() {
-                        window.print();
-                    }, 4000); // Delay for 2 seconds
-                } else {
-                    window.close(); // Close window after second print
-                }
+                window.close();
             };
         });
     </script>
