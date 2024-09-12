@@ -159,9 +159,15 @@
             // Trigger the print dialog
             window.print();
 
-            // Close the window after the print dialog is opened
             window.onafterprint = function() {
-                window.close();
+                printCount += 1;
+
+            // Check if it has printed once, then trigger the second print
+                if (printCount < 2) {
+                    window.print(); // Trigger print again
+                } else {
+                    window.close(); // Close window after second print
+                }
             };
         });
     </script>
