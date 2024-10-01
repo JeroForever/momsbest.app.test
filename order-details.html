@@ -150,6 +150,7 @@
             <p>Date of transaction: <span id="transactiondate2"></span></p>
             <p>Total Amount Ordered: <span id="orderedqty2"></span></p>
             <p>Total Amount: <span id="totalamount2"></span></p>
+            <p>Payment Status: <span id="paymentstatus2"></span></p>
             <p>&nbsp;</p>
         </div>
 
@@ -178,6 +179,7 @@
                 transactiondate: params.get('transactiondate'),
                 orderedqty: params.get('orderedqty'),
                 totalamount: params.get('totalamount'),
+                paymentstatus: params.get('paymentstatus'),
                 cardnumber: params.get('cardnumber')
             };
         }
@@ -194,6 +196,7 @@
             document.getElementById('transactiondate').textContent = params.transactiondate;
             document.getElementById('orderedqty').textContent = params.orderedqty;
             document.getElementById('totalamount').textContent = params.totalamount;
+            document.getElementById('paymentstatus').textContent = params.paymentstatus;
             document.getElementById('cardnumber-box').textContent = params.cardnumber;
 
             // Populate second receipt
@@ -205,6 +208,7 @@
             document.getElementById('transactiondate2').textContent = params.transactiondate;
             document.getElementById('orderedqty2').textContent = params.orderedqty;
             document.getElementById('totalamount2').textContent = params.totalamount;
+            document.getElementById('paymentstatus2').textContent = params.paymentstatus;
             document.getElementById('cardnumber-box2').textContent = params.cardnumber;
 
             // Trigger the print dialog
