@@ -131,7 +131,6 @@
             <p>Customer Name: <span id="customername"></span></p>
             <p>Transaction Number: <span id="orderid"></span></p>
             <p>Date of Transaction: <span id="transactiondate"></span></p>
-            <p>Payment Status: <span id="paymentstatus"></span></p>
         </div>
 
         <div class="card-box" id="cardnumber-box"></div>
@@ -160,7 +159,6 @@
             <p>Customer Name: <span id="customername2"></span></p>
             <p>Transaction Number: <span id="orderid2"></span></p>
             <p>Date of Transaction: <span id="transactiondate2"></span></p>
-            <p>Payment Status: <span id="paymentstatus2"></span></p>
         </div>
 
         <div class="card-box" id="cardnumber-box2"></div>
@@ -186,7 +184,6 @@
                 customername: params.get('customername'),
                 orderid: params.get('orderid'),
                 transactiondate: params.get('transactiondate'),
-                paymentstatus: params.get('paymentstatus'),
                 cardnumber: params.get('cardnumber')
             };
         }
@@ -200,7 +197,6 @@
             document.getElementById('customername').textContent = params.customername;
             document.getElementById('orderid').textContent = params.orderid;
             document.getElementById('transactiondate').textContent = params.transactiondate;
-            document.getElementById('paymentstatus').textContent = params.paymentstatus;
             document.getElementById('cardnumber-box').textContent = params.cardnumber;
 
             document.getElementById('shopname2').textContent = params.shopname;
@@ -209,7 +205,6 @@
             document.getElementById('customername2').textContent = params.customername;
             document.getElementById('orderid2').textContent = params.orderid;
             document.getElementById('transactiondate2').textContent = params.transactiondate;
-            document.getElementById('paymentstatus2').textContent = params.paymentstatus;
             document.getElementById('cardnumber-box2').textContent = params.cardnumber;
 
             window.print();
@@ -220,4 +215,3 @@
     </script>
 </body>
 </html>
-
